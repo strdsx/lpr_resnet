@@ -137,7 +137,7 @@ def train_val(is_inception=False):
 					_, predicted = torch.max(outputs, 1)
 
 					if phase == 'train':
-			8 : 2ss.backward()
+						loss.backward()
 						optimizer.step()
 
 				running_loss += loss.item() * inputs.size(0)
