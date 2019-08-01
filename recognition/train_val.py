@@ -39,11 +39,13 @@ def train_val(is_inception=False):
 		)
 	
 
-	# train : valid = 7 : 3
-	valid_size = 0.3
+	# train : valid = 8 : 2
+	valid_size = 0.2
 	num_train = len(trainset)
 	indices = list(range(num_train))
-	split = int(np.floor(valid_size * num_train))
+	split = int(np.floor(num_train * valid_size))
+	
+	print("num_train : ", num_train)
 	
 	shuffle = True
 	random_seed = 500
@@ -59,7 +61,7 @@ def train_val(is_inception=False):
 	dataloaders = {}
 	dataloaders['train'] = torch.utils.data.DataLoader(
 		trainset,
-		batch_size=1024,
+		batch_size=512,
 		# shuffle=True,
 		sampler=train_sampler,
 		num_workers=0,
@@ -67,7 +69,7 @@ def train_val(is_inception=False):
 
 	dataloaders['val'] = torch.utils.data.DataLoader(
 		validset,
-		batch_size=1024,
+		batch_size=512,
 		# shuffle=True,
 		sampler=valid_sampler,
 		num_workers=0,
@@ -83,7 +85,7 @@ def train_val(is_inception=False):
 
 	model = Res.ResNet(Res.Bottleneck, [3,8,36,3])
 
-	model.load_state_dict(torch.load("model/resnet152_best-2.ckpt"))
+	model.load_state_dict(torch.load("model/resnet152_best-6.ckpt"))
 
 	device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 	model = model.to(device)
@@ -135,7 +137,7 @@ def train_val(is_inception=False):
 					_, predicted = torch.max(outputs, 1)
 
 					if phase == 'train':
-						loss.backward()
+			8 : 2ss.backward()
 						optimizer.step()
 
 				running_loss += loss.item() * inputs.size(0)
