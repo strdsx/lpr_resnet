@@ -60,7 +60,7 @@ def train_val(is_inception=False):
 	dataloaders['train'] = torch.utils.data.DataLoader(
 		trainset,
 		batch_size=1024,
-		shuffle=True,
+		# shuffle=True,
 		sampler=train_sampler,
 		num_workers=0,
 		)
@@ -68,7 +68,7 @@ def train_val(is_inception=False):
 	dataloaders['val'] = torch.utils.data.DataLoader(
 		validset,
 		batch_size=1024,
-		shuffle=True,
+		# shuffle=True,
 		sampler=valid_sampler,
 		num_workers=0,
 		)
