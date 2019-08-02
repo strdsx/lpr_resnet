@@ -39,13 +39,17 @@ def train_val(is_inception=False):
 		)
 	
 
-	# train : valid = 8 : 2
-	valid_size = 0.2
+	# train : valid
+	valid_size = 0.3
 	num_train = len(trainset)
 	indices = list(range(num_train))
-	split = int(np.floor(num_train * valid_size))
-	
+	split = int(np.floor(valid_size * num_train))
+
+	print(" ")
 	print("num_train : ", num_train)
+	print("length indices : ", len(indices))
+	print("split number : ", split)
+	print(" ")
 	
 	shuffle = True
 	random_seed = 500
@@ -76,8 +80,8 @@ def train_val(is_inception=False):
 		)
 
 	print("Success data load...")
-	print("trainset : ",len(trainset))
-	print("validset : ",len(validset))
+	print("trainset : ",len(train_idx))
+	print("validset : ",len(valid_idx))
 
 	since = time.time()
 	
